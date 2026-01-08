@@ -1,0 +1,17 @@
+{
+  "name": "new-business-form-automation",
+  "version": "1.0.0",
+  "description": "This project is for automating the creation process of new businesses, for TB Services",
+  "license": "ISC",
+  "author": "Lucas F Custodio",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1"
+  }
+}
