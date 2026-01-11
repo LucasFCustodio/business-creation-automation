@@ -1,6 +1,6 @@
 import express from "express";
 import 'dotenv/config';
-import { count } from "console";
+import { fillSunBizForm } from "./sunbizBot.js";
 
 const app = express();
 const PORT = 3000;
@@ -101,17 +101,55 @@ app.post("/solicitacao-estadual", (req, res) => {
     }
 
     
-    //Print all of the information to make sure it is correct
-    /*console.log(`Month: ${month}, Day: ${day}, Year: ${year}\nBusiness Type: ${businessType}\nBusiness Name: ${businessName}\nBusiness Address: ${businessAddress}\n\n`);
+    //All information that needs to be used on SunBiz is correct. Only need some info which was not available
+    console.log(`Month: ${month}, Day: ${day}, Year: ${year}\nBusiness Type: ${businessType}\nBusiness Name: ${businessName}\nBusiness Address: ${businessAddress}\n\n`);
     console.log(`Here comes the business address in parts:\nCity: ${city}, State: ${businessState}, Zip Code: ${zip}, Country: ${country}\n\n`);
     console.log(`Here comes the owner name information in parts:\nfirst name: ${ownerFirstName}, last name: ${ownerLastName}, initial: ${ownerNameInitial}, signature: ${ownerSignature}\n`);
     console.log(`TB Email: ${emailTB}\n`);
-    console.log(`Here comes the partner name information in parts:\nfirst name: ${partnerFirstName}, last name: ${partnerLastName}, initial: ${partnerNameInitial}\n`);*/
+    console.log(`Here comes the partner name information in parts:\nfirst name: ${partnerFirstName}, last name: ${partnerLastName}, initial: ${partnerNameInitial}\n`);
     console.log(`Here comes the partner address in parts:\nCity: ${partnerCity}, State: ${partnerState}, Zip Code: ${partnerZip}, Country: ${partnerCountry}\n\n`);
     console.log("Does partner have the same address?" + data["samePartnerAddress"]);
 
     //Notify the server the response was successfully received
     res.status(200).send("HTTP request sucessfully received from Pipefy");
+
+    //Store everything into completeData variable, and call the SunBiz function
+    const completeData = {
+        effectiveDate: {
+            day: day,
+            month: month,
+            year: year
+        },
+        business: {
+            name: businessName,
+            type: businessType,
+            address: businessAddress, // The full string
+            city: city,
+            state: businessState,
+            zip: zip,
+            country: country
+        },
+        owner: {
+            firstName: ownerFirstName,
+            lastName: ownerLastName,
+            initial: ownerNameInitial,
+            signature: ownerSignature
+        },
+        partner: {
+            firstName: partnerFirstName,
+            lastName: partnerLastName,
+            initial: partnerNameInitial,
+            city: partnerCity,
+            state: partnerState,
+            zip: partnerZip,
+            country: partnerCountry
+        },
+        general: {
+            email: emailTB
+        }
+    };
+    
+    fillSunBizForm(completeData);
 })
 
 app.listen(PORT, () => {
