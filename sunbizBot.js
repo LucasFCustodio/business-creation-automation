@@ -74,9 +74,11 @@ export async function fillSunBizForm(data) {
         }
 
             browser = await puppeteer.launch({
-            headless: false,
-            slowMo: 3,
+            headless: "new",
             args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
                 '--disable-features=AutofillAddressEnabled',
                 '--disable-offer-store-unmasked-wallet-cards',
                 '--disable-autofill-keyboard-accessory-view'
