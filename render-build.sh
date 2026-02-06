@@ -3,5 +3,5 @@
 set -o errexit
 
 npm install
-# This installs the default browser version for your puppeteer version
-npx puppeteer browsers install chrome
+# Run the installation script via node to bypass binary permission errors
+node node_modules/puppeteer/install.mjs
