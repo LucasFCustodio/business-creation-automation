@@ -3,5 +3,5 @@
 set -o errexit
 
 npm install
-# This command downloads the necessary Chrome binary specifically for the Render environment
-npx puppeteer browsers install chrome
+# Run the script via node to bypass binary permission issues
+node node_modules/puppeteer/install.mjs
