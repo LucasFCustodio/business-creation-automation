@@ -74,6 +74,7 @@ export async function fillSunBizForm(data) {
         }
 
             browser = await puppeteer.launch({
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null,
             headless: "new",
             args: [
                 '--no-sandbox',
