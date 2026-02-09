@@ -8,10 +8,11 @@ let browser = null;
 
 export async function fillSunBizForm(data) {
     try {
-        console.log("state is: " + data.business.state);
+        console.log("Beginning state form filing now...");
 
         //Logic for if the client wants to open a business in DELAWARE
         if (data.business.state === "DE") {
+            console.log("Entering logic for Delaware...")
             try {
                 const templateParams = {
                     title: data.business.name + " LLC",
@@ -43,6 +44,7 @@ export async function fillSunBizForm(data) {
         }
 
         if (data.checks.rushProcess === "Yes (+$300)") {
+            console.log("Entering logic for Rush Process...")
             try {
                 const templateParams = {
                     title: data.business.name + " LLC",
@@ -89,17 +91,17 @@ export async function fillSunBizForm(data) {
         const page = await browser.newPage();
 
         page.on('dialog', async dialog => {
-            console.log("--------------------------------");
-            console.log(`DIALOG DETECTED: ${dialog.message()}`);
-            console.log("--------------------------------");
             await dialog.accept(); // Press "Enter" / Click "OK"
         });
 
+        //LOGIC FOR AN LLC BUSINESS TYPE
         if(data.business.type === "LLC") {
             await page.setViewport({ width: 1920, height: 1080 });
 
             //Navigate page to the URL - https://efile.sunbiz.org/llc_file.html
             await page.goto('https://efile.sunbiz.org/llc_file.html');
+
+            console.log("Starting filing for an LLC Business...")
 
             //Check the disclaimer textbox, and click on 'start new filing'
             await page.click('#disclaimer_read');
@@ -199,7 +201,7 @@ export async function fillSunBizForm(data) {
 
             // --- SEND EMAIL WITH THE TRACKING NUMBER ---
             try {
-                console.log("Retireving Tracking #");
+                console.log("Retireving Tracking #...");
 
                 // Wait for the tracking number element to appear
                 await page.waitForSelector('td.efiledata');
