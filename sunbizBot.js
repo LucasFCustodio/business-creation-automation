@@ -80,6 +80,7 @@ export async function fillSunBizForm(data) {
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
                 '--disable-dev-shm-usage',
+                '--disable-gpu',
                 '--disable-features=AutofillAddressEnabled',
                 '--disable-offer-store-unmasked-wallet-cards',
                 '--disable-autofill-keyboard-accessory-view'
