@@ -86,6 +86,8 @@ app.post("/solicitacao-estadual", async (req, res) => {
     const partnerLastNameList = partnerLastNameString.split(", ");
     const numberOfPartners = partnerFirstNameList.length;
 
+    console.log("This is the number of partners: " + numberOfPartners);
+
     //Partner Address Section - WILL CHANGE WHEN PIPEFY CHANGES
     const partnerAddressNumberString = data["partnerAddressNumber"];
     const partnerStreetNameString = data["partnerStreetName"];
@@ -152,6 +154,7 @@ app.post("/solicitacao-estadual", async (req, res) => {
 
 
     //Fill out the form, and if it returns a 'success', then call the moveCardToPhase which activates the Make automatioion to move the card to the next phase - WILL CHANGE TO A DIFFERENT PROGRAM
+    console.log("Filling out SunBiz form now...");
     if (await fillSunBizForm(completeData) === "success") {
         console.log("Form completed successfully.");
     }
