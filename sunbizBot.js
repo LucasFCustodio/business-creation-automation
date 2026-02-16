@@ -125,8 +125,7 @@ export async function fillSunBizForm(data) {
             //Fill in Principal Place of Business Information
             await page.type('#princ_addr1', data.business.address);
             await page.type('#princ_city', data.business.city);
-            var stateInitials = states.abbr(data.business.state);
-            await page.type('#princ_st', stateInitials);
+            await page.type('#princ_st', data.business.state);
             await page.type('#princ_zip', data.business.zip);
             await page.type('#princ_cntry', data.business.country);
 
