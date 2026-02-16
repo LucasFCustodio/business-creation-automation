@@ -7,7 +7,7 @@ import emailjs from "@emailjs/nodejs";
 let browser = null;
 
 export async function fillSunBizForm(data) {
-    console.log("Received Data in sunbizBot.js: " + data);
+    console.log("Received Data in sunbizBot.js: ", data);
     try {
         console.log("Beginning state form filing now...");
 
